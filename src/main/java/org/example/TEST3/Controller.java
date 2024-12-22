@@ -3,6 +3,7 @@ package org.example.TEST3;
 import org.example.TEST3.Order.Order;
 import org.example.TEST3.User.User;
 import org.example.TEST3.User.UserService;
+import org.example.TEST3.waitingOrder.waitingOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
@@ -45,10 +46,46 @@ public class Controller {
         return "index";
     }
 
+    @RequestMapping("/waitingList")
+    public String waitingOrders(Model model) {
+        List<waitingOrder> waitingOrders = service.waitListAll();
+        model.addAttribute("waitingOrders", waitingOrders);
+        return "waiting_list";
+    }
+
+    @RequestMapping("/save/{id}")
+    public String saveWaiting(@PathVariable Integer id) {
+        waitingOrder waitingOrder = service.waitingFindById(id);
+        Order order = new Order();
+        order.setBottleQuantity(waitingOrder.getBottleQuantity());
+        order.setClientType(waitingOrder.getClientType());
+        order.setClientName(waitingOrder.getClientName());
+        order.setWaterType(waitingOrder.getWaterType());
+        order.setBottleType(waitingOrder.getBottleType());
+        order.setBottleQuantity(waitingOrder.getBottleQuantity());
+        order.setOrderDate(waitingOrder.getOrderDate());
+        order.setDeliveryDate(waitingOrder.getDeliveryDate());
+        order.setDeliveryAddress(waitingOrder.getDeliveryAddress());
+        try {
+            service.updateQuantity(order.getBottleQuantity(), order.getBottleType());
+        } catch (RuntimeException e) {
+            return "/quantityError";
+        }
+        service.save(order);
+        service.waitingDeleteById(id);
+        return "redirect:/waitingList";
+    }
+
     @RequestMapping("/new")
     public String newCargo(Model model) {
         model.addAttribute("order", new Order());
         return "new";
+    }
+
+    @RequestMapping("/newWaiting")
+    public String newWaitingCargo(Model model) {
+        model.addAttribute("order", new waitingOrder());
+        return "newWaiting";
     }
 
     @RequestMapping(value = "/save")
@@ -61,6 +98,12 @@ public class Controller {
         service.save(order);
 
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/saveWaiting")
+    public String saveWaitingCargo(@ModelAttribute("order") waitingOrder order) {
+        service.waitingSave(order);
+        return "redirect:/welcome";
     }
 
     @RequestMapping("/edit/{id}")
@@ -100,6 +143,11 @@ public class Controller {
         Order order = service.findById(id);
         service.updateQuantity(-order.getBottleQuantity(), order.getBottleType());
         service.deleteById(id);
+        return "redirect:/";
+    }
+    @RequestMapping("/deleteWaiting/{id}")
+    public String deleteWaitingOrder(@PathVariable Integer id) {
+        service.waitingDeleteById(id);
         return "redirect:/";
     }
 

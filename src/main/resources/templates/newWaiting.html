@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Добавление заказа</title>
+<header th:replace="index :: head"></header>
+<body>
+<div class="row">
+  <div class="col-md-12">
+    <form action="#" th:action="@{/saveWaiting}" th:object="${order}" method="post">
+      <table>
+        <tr>
+          <td>Тип клиента (юр. лицо/физ.лицо)</td>
+          <td><input type="text" th:field="*{clientType}"></td>
+        </tr>
+        <tr>
+          <td>ФИО клиента/Название фирмы</td>
+          <td><input type="text" th:field="*{clientName}"></td>
+        </tr>
+        <tr>
+          <td>Тип воды</td>
+          <td><input type="text" th:field="*{waterType}"></td>
+        </tr>
+        <tr>
+          <td>Тип бутылки</td>
+          <td><select name="types" th:field="*{bottleType}">
+            <option value="пластиковая">пластиковая</option>
+            <option value="стеклянная">стеклянная</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td>Количество бутылок</td>
+          <td><input type="number" th:field="*{bottleQuantity}"></td>
+        </tr>
+        <tr>
+          <td>Дата заказа</td>
+          <td><input type="date" th:field="*{orderDate}"></td>
+        </tr>
+        <tr>
+          <td>Дата доставки</td>
+          <td><input type="date" th:field="*{deliveryDate}"></td>
+        </tr>
+        <tr>
+          <td>Адрес доставки</td>
+          <td><input type="text" th:field="*{deliveryAddress}"></td>
+        </tr>
+        <tr>
+          <td>
+            <button type="submit" class="btn btn-primary" data-toggle="button">Сохранить</button>
+            <a href="/welcome"><button type="button" class="btn btn-danger">Назад</button></a>
+            <a href="/"><button type="button" class="btn btn-danger">Менеджерская панель</button></a>
+          </td>
+
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+</body>
+</html>

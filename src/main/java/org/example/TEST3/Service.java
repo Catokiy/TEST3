@@ -4,6 +4,8 @@ import org.example.TEST3.Bottle.Bottle;
 import org.example.TEST3.Bottle.BottleRepo;
 import org.example.TEST3.Order.Order;
 import org.example.TEST3.Order.OrderRepo;
+import org.example.TEST3.waitingOrder.waitingOrder;
+import org.example.TEST3.waitingOrder.waitingOrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -12,7 +14,8 @@ import java.util.List;
 public class Service {
     @Autowired
     private OrderRepo orderRepo;
-
+    @Autowired
+    private waitingOrderRepo waitRepo;
     @Autowired
     private BottleRepo bottleRepo;
 
@@ -32,6 +35,9 @@ public class Service {
         return orderRepo.findAll();
 
     }
+    public List<waitingOrder> waitListAll() {
+        return waitRepo.findAll();
+    }
     public void save(Order order) {
         this.orderRepo.save(order);
     }
@@ -41,6 +47,17 @@ public class Service {
     public void deleteById(int id) {
         orderRepo.deleteById(id);
     }
+
+    public void waitingSave(waitingOrder waitOrder) {
+        this.waitRepo.save(waitOrder);
+    }
+    public waitingOrder waitingFindById(int id) {
+        return waitRepo.findById(id).get();
+    }
+    public void waitingDeleteById(int id) {
+        waitRepo.deleteById(id);
+    }
+
 
     public Bottle get_glass_quantity() {
         return bottleRepo.get_quantity("стеклянная");
