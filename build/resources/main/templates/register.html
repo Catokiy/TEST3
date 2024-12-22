@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>registration</title>
-    <link rel="stylesheet" href="styles/reg_n_log.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reg_n_log.css}">
 </head>
 <body>
     <form action="#" method="post" th:action="@{/register}" th:object="${User}" class="form">
         <label for="login">Придумайте логин</label>
         <input th:field="*{username}" type="text" name="login" id="login" class="data"/>
         <label for="password">Придумайте пароль</label>
-        <input th:field="*{password}" type="text" name="password" id="password" class="data"/>
+        <input th:field="*{password}" type="password" name="password" id="password" class="data"/>
 
-        <button type="submit" value="Зарегистрироваться" class="data"></button>
+        <button type="submit" class="data">Зарегистрироваться</button>
     </form>
 </body>
 </html>
