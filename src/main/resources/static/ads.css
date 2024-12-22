@@ -1,0 +1,28 @@
+.header__nav {
+    height: 100px;
+    position: relative;
+}
+
+.make-order {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.news_feed {
+    width: 50%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    grid-auto-rows: 2fr;
+}
+
+.post__title, .post__text {
+    text-align: center;
+}
+
+.post__pic {
+    width: 200px;
+    height: 200px;
+}

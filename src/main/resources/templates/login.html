@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Редактирование заказа</title>
+<header th:replace="index :: head"></header>
+<body>
+<div class="row">
+    <div class="col-md-12">
+        <form action="#" th:action="@{/login}" th:object="${User}" method="post">
+            <table>
+                <tr>
+                    <td>логин</td>
+                    <td><input type="text" th:field="*{username}"></td>
+                </tr>
+                <tr>
+                    <td>пароль</td>
+                    <td><input type="password" th:field="*{password}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-primary" data-toggle="button">Сохранить</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
