@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/register", "/login").permitAll()  // Разрешить доступ к регистрационным страницам
-                                .requestMatchers("/admin/**").hasRole("ADMIN")  // Только для администраторов
+                                .requestMatchers("/user_administration", "/edit_user/**").hasRole("ADMIN")  // Только для администраторов
                                 .requestMatchers("/","/edit/","/cancel-edit/","/save-edited","/find").hasAnyRole("MANAGER", "ADMIN")  // Только для менеджеров
                                 .requestMatchers("/new", "/save").hasAnyRole("CUSTOMER", "MANAGER", "ADMIN")  // Только для заказчиков
                                 .requestMatchers("/welcome").hasAnyRole("GUEST","CUSTOMER", "MANAGER", "ADMIN")  // Только для заказчиков
@@ -36,7 +36,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/welcome",true)
                         .permitAll())
                 .logout(withDefaults())
-                .exceptionHandling(exception -> exception.accessDeniedPage("/welcome"));
+                .exceptionHandling(exception -> exception.accessDeniedPage("/permission_denied"));
 
 
         return http.build();

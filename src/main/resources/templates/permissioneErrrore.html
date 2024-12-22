@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permission Denied</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/permission-denied.css}">
+</head>
+<body>
+<div class="container">
+    <div class="illustration">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="32" cy="32" r="30" />
+            <line x1="20" y1="20" x2="44" y2="44" />
+            <line x1="44" y1="20" x2="20" y2="44" />
+        </svg>
+    </div>
+    <h1>Access Denied</h1>
+    <div class="error-code">403</div>
+    <p>Oops! You don’t have permission to access this page.<br>Contact your administrator if you think this is a mistake.</p>
+    <a href="/welcome" class="btn">Go to Homepage</a>
+</div>
+</body>
+</html>
