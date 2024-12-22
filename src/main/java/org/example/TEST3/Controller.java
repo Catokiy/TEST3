@@ -127,10 +127,14 @@ public class Controller {
         modelAndView.addObject("user", user);
         return modelAndView;
     }
-
     @RequestMapping("/save_user")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/user_administration";
     }
+    @RequestMapping("/permission_denied")
+    public String permission_denied() {
+        return "permissioneErrrore";
+    }
+
 }
