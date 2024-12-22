@@ -25,8 +25,8 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers("/register", "/login").permitAll()  // Разрешить доступ к регистрационным страницам
                                 .requestMatchers("/user_administration", "/edit_user/**").hasRole("ADMIN")  // Только для администраторов
-                                .requestMatchers("/","/edit/","/cancel-edit/","/save-edited","/find").hasAnyRole("MANAGER", "ADMIN")  // Только для менеджеров
-                                .requestMatchers("/new", "/save").hasAnyRole("CUSTOMER", "MANAGER", "ADMIN")  // Только для заказчиков
+                                .requestMatchers("/","new","/edit/","/cancel-edit/","/save-edited","/find", "deleteWaiting/**", "save/**","waitingList", "/save").hasAnyRole("MANAGER", "ADMIN")  // Только для менеджеров
+                                .requestMatchers("/newWaiting", "/saveWaiting").hasAnyRole("CUSTOMER", "MANAGER", "ADMIN")  // Только для заказчиков
                                 .requestMatchers("/welcome").hasAnyRole("GUEST","CUSTOMER", "MANAGER", "ADMIN")  // Только для заказчиков
                                 .anyRequest().authenticated()  // Для всех остальных страниц — требуется аутентификация
                 )
