@@ -40,6 +40,8 @@ public class Controller {
         List<Order> orderList = service.listFiltered(filter);
         model.addAttribute("filter", new Order());
         model.addAttribute("orderList", orderList);
+        model.addAttribute("plasticQuantity", service.get_plastic_quantity());
+        model.addAttribute("glassQuantity", service.get_glass_quantity());
         return "index";
     }
 

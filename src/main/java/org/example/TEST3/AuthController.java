@@ -29,7 +29,7 @@ public class AuthController {
     @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute("User", new User());
-        return "register";  // Страница для регистрации
+        return "register";
     }
 
     @PostMapping("/register")
@@ -37,14 +37,13 @@ public class AuthController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
-        user.setRole("GUEST");  // Устанавливаем роль по умолчанию как "GUEST"
+        user.setRole("GUEST");
         userService.saveUser(user);
-        return "redirect:/login";  // Перенаправляем на страницу логина после успешной регистрации
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
     public String login(Model model) {
-        System.out.println("qweqweqwe");
         model.addAttribute("User", new User());
         return "login";
     }
@@ -52,7 +51,7 @@ public class AuthController {
     public ResponseEntity<Resource> getCss() {
         Resource resource = resourceLoader.getResource("classpath:static/css/reg_n_log.css");
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("text/css"))  // Изменено здесь
+                .contentType(MediaType.parseMediaType("text/css"))
                 .body(resource);
     }
 
