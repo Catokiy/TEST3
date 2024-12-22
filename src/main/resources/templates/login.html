@@ -1,29 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
-<title>Редактирование заказа</title>
-<header th:replace="index :: head"></header>
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование заказа</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reg_n_log.css}">
+</head>
 <body>
-<div class="row">
-    <div class="col-md-12">
-        <form action="#" th:action="@{/login}" th:object="${User}" method="post">
-            <table>
-                <tr>
-                    <td>логин</td>
-                    <td><input type="text" th:field="*{username}"></td>
-                </tr>
-                <tr>
-                    <td>пароль</td>
-                    <td><input type="password" th:field="*{password}"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit" class="btn btn-primary" data-toggle="button">Сохранить</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</div>
+<form action="#" th:action="@{/login}" th:object="${User}" method="post" class="form">
+    <label for="login">Логин</label>
+    <input th:field="*{username}" type="text" name="login" id="login" class="data"/>
+    <label for="password">Пароль</label>
+    <input th:field="*{password}" type="password" name="password" id="password" class="data"/>
+
+    <button type="submit" class="data">Войти</button>
+</form>
 </body>
 </html>
