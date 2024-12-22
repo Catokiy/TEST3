@@ -1,10 +1,15 @@
 package org.example.TEST3;
 
 import org.example.TEST3.Order.Order;
+import org.example.TEST3.User.User;
+import org.example.TEST3.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -13,6 +18,9 @@ import java.util.List;
 public class Controller {
     @Autowired
     private Service service;
+
+    @Autowired
+    private UserService userService;
 
     private Integer editBackup = 0;
 
@@ -93,16 +101,34 @@ public class Controller {
         return "redirect:/";
     }
 
-    @RequestMapping("/find")
-    public String search(@RequestParam String keyword) {
-        List<Order> result = service.listAll(keyword);
-        ModelAndView mav = new ModelAndView("find");
-        mav.addObject("result", result);
-        return "find";
-    }
-
     @RequestMapping("/welcome")
     public String welcome(){
         return "welcome";
+    }
+
+    @RequestMapping("/user_administration")
+    public String user_admin(Model model) {
+        List<User> users = userService.listAll();
+        model.addAttribute("users",users);
+        return "user_administration";
+    }
+
+    @RequestMapping("/delete_user/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteById(id);
+        return "redirect:/user_administration";
+    }
+    @RequestMapping("/edit_user/{username}")
+    public ModelAndView editUser(@PathVariable String username) {
+        User user = userService.loadUserByUsername(username);
+        ModelAndView modelAndView = new ModelAndView("edit_user");
+        modelAndView.addObject("user", user);
+        return modelAndView;
+    }
+
+    @RequestMapping("/save_user")
+    public String saveUser(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
+        return "redirect:/user_administration";
     }
 }

@@ -35,7 +35,8 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/welcome",true)
                         .permitAll())
-                .logout(withDefaults());
+                .logout(withDefaults())
+                .exceptionHandling(exception -> exception.accessDeniedPage("/welcome"));
 
 
         return http.build();

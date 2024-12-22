@@ -1,0 +1,10 @@
+GET http://localhost:8081
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.12)
+Cookie: JSESSIONID=2B5E9ECE5FEAF09E1F57D6C9D9ABDF24
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-12-22T214202.200.html
+
+###
+
