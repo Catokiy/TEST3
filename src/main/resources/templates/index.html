@@ -33,6 +33,7 @@
         <th scope="col">Дата заказа</th>
         <th scope="col">Дата доставки</th>
         <th scope="col" style="max-width: 200px">Адрес доставки</th>
+        <th scope="col">Ответственный менеджер</th>
         <th scope="col">Действия</th>
     </tr>
     </thead>
@@ -47,6 +48,7 @@
         <th scope="row" th:text="${order.orderDate}">null</th>
         <th scope="row" th:text="${order.deliveryDate}" >null</th>
         <th scope="row" th:text="${order.deliveryAddress}" style="max-width: 200px">null</th>
+        <th scope="row" th:text="${order.managerInCharge}" style="max-width: 200px">null</th>
         <td>
             <a th:href="@{'/edit/'+${order.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>
             <a th:href="@{'/delete/'+${order.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>

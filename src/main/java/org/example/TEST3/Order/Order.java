@@ -16,6 +16,7 @@ public class Order {
     private String orderDate;
     private String deliveryDate;
     private String deliveryAddress;
+    private String managerInCharge;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {

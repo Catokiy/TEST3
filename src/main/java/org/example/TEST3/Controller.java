@@ -6,11 +6,9 @@ import org.example.TEST3.User.UserService;
 import org.example.TEST3.waitingOrder.waitingOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -26,8 +24,8 @@ public class Controller {
     private Integer editBackup = 0;
 
     @RequestMapping("/")
-    public String index(Model model, @Param("keyword") String keyword) {
-        List<Order> orderList = service.listAll(keyword);
+    public String index(Model model, @Param("keyword") String keyword, @AuthenticationPrincipal User user) {
+        List<Order> orderList = service.listAll(keyword,user.getUsername());
         model.addAttribute("filter", new Order());
         model.addAttribute("orderList", orderList);
         model.addAttribute("keyword", keyword);
@@ -37,8 +35,8 @@ public class Controller {
     }
 
     @RequestMapping(method = RequestMethod.POST, value="/")
-    public String indexFiltered(Model model, @ModelAttribute("filter") Order filter) {
-        List<Order> orderList = service.listFiltered(filter);
+    public String indexFiltered(Model model, @ModelAttribute("filter") Order filter, @AuthenticationPrincipal  User user) {
+        List<Order> orderList = service.listFiltered(filter, user.getUsername());
         model.addAttribute("filter", new Order());
         model.addAttribute("orderList", orderList);
         model.addAttribute("plasticQuantity", service.get_plastic_quantity());
@@ -66,6 +64,7 @@ public class Controller {
         order.setOrderDate(waitingOrder.getOrderDate());
         order.setDeliveryDate(waitingOrder.getDeliveryDate());
         order.setDeliveryAddress(waitingOrder.getDeliveryAddress());
+        order.setManagerInCharge(null);
         try {
             service.updateQuantity(order.getBottleQuantity(), order.getBottleType());
         } catch (RuntimeException e) {

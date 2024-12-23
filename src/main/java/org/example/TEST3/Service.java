@@ -19,20 +19,22 @@ public class Service {
     @Autowired
     private BottleRepo bottleRepo;
 
-    public List<Order> listAll(String keyword) {
+    public List<Order> listAll(String keyword, String username) {
         if (keyword != null) {
-            return orderRepo.search(keyword);
+            return orderRepo.searchKey(keyword, username);
         }
-        return orderRepo.findAll();
+        System.out.println(username);
+        if (username.equals("root")) {return orderRepo.findAll();}
+        return orderRepo.search(username);
     }
-    public List<Order> listFiltered(Order filter) {
+    public List<Order> listFiltered(Order filter, String username) {
         String date = filter.getDeliveryDate();
         if (date != null & !date.isEmpty()) {
             date = date.substring(0, 4) + '-' + date.substring(5, 7) + '-' + date.substring(8);
             System.out.println(date);
             return orderRepo.searchFiltered(date);
         }
-        return orderRepo.findAll();
+        return orderRepo.search(username);
 
     }
     public List<waitingOrder> waitListAll() {
