@@ -6,6 +6,7 @@ import org.example.TEST3.User.UserService;
 import org.example.TEST3.waitingOrder.waitingOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,13 @@ public class Controller {
         List<waitingOrder> waitingOrders = service.waitListAll();
         model.addAttribute("waitingOrders", waitingOrders);
         return "waiting_list";
+    }
+
+    @RequestMapping("/customersOrders")
+    public String customersOrders(Model model, @AuthenticationPrincipal User user) {
+        List<waitingOrder> waitingOrders = service.findByName(user.getUsername());
+        model.addAttribute("waitingOrders", waitingOrders);
+        return "customers_orders";
     }
 
     @RequestMapping("/save/{id}")
@@ -101,7 +109,8 @@ public class Controller {
     }
 
     @RequestMapping(value = "/saveWaiting")
-    public String saveWaitingCargo(@ModelAttribute("order") waitingOrder order) {
+    public String saveWaitingCargo(@ModelAttribute("order") waitingOrder order, @AuthenticationPrincipal User user) {
+        order.setUserName(user.getUsername());
         service.waitingSave(order);
         return "redirect:/welcome";
     }

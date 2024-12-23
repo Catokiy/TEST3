@@ -33,8 +33,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password) {
+    public String register(@RequestParam String username, @RequestParam String password, @RequestParam String fullName) {
         User user = new User();
+        user.setFullName(fullName);
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setRole("GUEST");

@@ -16,6 +16,7 @@ public class waitingOrder {
     private String orderDate;
     private String deliveryDate;
     private String deliveryAddress;
+    private String userName;
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {

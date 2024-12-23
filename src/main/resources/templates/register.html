@@ -8,6 +8,8 @@
 </head>
 <body>
     <form action="#" method="post" th:action="@{/register}" th:object="${User}" class="form">
+        <label for="name">Введите ФИО</label>
+        <input th:field="*{fullName}" type="text" name="name" id="name" class="data"/>
         <label for="login">Придумайте логин</label>
         <input th:field="*{username}" type="text" name="login" id="login" class="data"/>
         <label for="password">Придумайте пароль</label>

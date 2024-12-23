@@ -8,12 +8,15 @@
 </head>
 <body>
     <form action="#" method="post" th:action="@{/register}" th:object="${User}" class="form">
+        <label for="name">Введите ФИО</label>
+        <input th:field="*{fullName}" type="text" name="name" id="name" class="data"/>
         <label for="login">Придумайте логин</label>
         <input th:field="*{username}" type="text" name="login" id="login" class="data"/>
         <label for="password">Придумайте пароль</label>
         <input th:field="*{password}" type="password" name="password" id="password" class="data"/>
 
         <button type="submit" class="data">Зарегистрироваться</button>
+        <a href="/login"><button type="button" class="data">Логин</button></a>
     </form>
 </body>
 </html>

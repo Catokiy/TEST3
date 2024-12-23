@@ -21,7 +21,9 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    private String role;  // Роль пользователя (например, "ADMIN", "CUSTOMER", "MANAGER")
+    private String role;
+    @Getter
+    private String fullName;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

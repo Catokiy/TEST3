@@ -19,6 +19,11 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
+//    public User loadUserByFullName(String fullName) throws UsernameNotFoundException {
+//        return userRepo.findByFullName(fullName)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//    }
+
     public User saveUser(User user) {
         return userRepo.save(user);
     }

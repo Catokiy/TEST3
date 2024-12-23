@@ -47,6 +47,8 @@ public class Service {
     public void deleteById(int id) {
         orderRepo.deleteById(id);
     }
+    public List<waitingOrder> findByName(String fullname) {return waitRepo.findByName(fullname);}
+
 
     public void waitingSave(waitingOrder waitOrder) {
         this.waitRepo.save(waitOrder);

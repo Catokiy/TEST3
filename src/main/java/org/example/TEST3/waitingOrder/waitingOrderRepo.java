@@ -14,4 +14,10 @@ public interface waitingOrderRepo extends JpaRepository<waitingOrder, Integer> {
 
     @Query("select t from waitingOrder t where t.deliveryDate like %?1% order by t.id")
     List<waitingOrder> searchFiltered(String date);
+
+    @Query("select t from waitingOrder t where t.userName = ?1 order by t.id")
+    List<waitingOrder> findByName(String fullName);
+
+    @Query("select t from waitingOrder t where t.clientName like %?1% order by t.id")
+    List<waitingOrder> searchOrdersByCustomers(String name);
 }
